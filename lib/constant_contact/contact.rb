@@ -16,7 +16,7 @@ module ConstantContact
     def to_xml
       xml = Builder::XmlMarkup.new
       xml.tag!("Contact", :xmlns => "http://ws.constantcontact.com/ns/1.0/") do
-        self.attributes.reject {|k,v| k == 'ContactLists'}.each{|k, v| xml.tag!( k.to_s.camelize, v )}
+        self.attributes.reject {|k,v| k == 'contact_lists' || k == 'opt_in_source'}.each{|k, v| xml.tag!( k.to_s.camelize, v )}
         xml.tag!("OptInSource", self.opt_in_source)
         xml.tag!("ContactLists") do
           @contact_lists = [1] if @contact_lists.nil? && self.new?
